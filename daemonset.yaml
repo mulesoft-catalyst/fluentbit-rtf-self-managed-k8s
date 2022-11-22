@@ -1,0 +1,114 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  annotations:
+    deprecated.daemonset.template.generation: "159"
+    kubectl.kubernetes.io/last-applied-configuration: 
+  creationTimestamp: "2022-06-09T18:06:16Z"
+  generation: 159
+  labels:
+    k8s-app: fluent-bit-logging
+    kubernetes.io/cluster-service: "true"
+    version: v1
+  name: fluent-bit
+  namespace: log-test
+  resourceVersion: "111178978"
+  uid: eab516b9-9027-468a-bea8-5bf1e3c71fea
+spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s-app: fluent-bit-logging
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/restartedAt: "2022-11-21T23:28:00Z"
+        prometheus.io/path: /api/v1/metrics/prometheus
+        prometheus.io/port: "2020"
+        prometheus.io/scrape: "true"
+      creationTimestamp: null
+      labels:
+        k8s-app: fluent-bit-logging
+        kubernetes.io/cluster-service: "true"
+        version: v1
+    spec:
+      containers:
+      - env:
+        - name: WorkspaceId
+          valueFrom:
+            secretKeyRef:
+              name: fluentbit-secrets
+              key: WorkspaceId
+        - name: SharedKey
+          valueFrom:
+            secretKeyRef:
+              name: fluentbit-secrets
+              key: SharedKey
+        - name: LogNameAppContainer
+          valueFrom:
+            secretKeyRef:
+              name: fluentbit-secrets
+              key: LogNameAppContainer
+        - name: LogNameMonitoringContainer
+          valueFrom:
+            secretKeyRef:
+              name: fluentbit-secrets
+              key: LogNameMonitoringContainer
+        - name: LogNameInitContainer
+          valueFrom:
+            secretKeyRef:
+              name: fluentbit-secrets
+              key: LogNameInitContainer
+        image: fluent/fluent-bit:1.9
+        imagePullPolicy: Always
+        name: fluent-bit
+        ports:
+        - containerPort: 2020
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/log
+          name: varlog
+        - mountPath: /var/lib/docker/containers
+          name: varlibdockercontainers
+          readOnly: true
+        - mountPath: /fluent-bit/etc/
+          name: fluent-bit-etc
+        - mountPath: /mnt
+          name: mnt
+          readOnly: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: fluent-bit
+      serviceAccountName: fluent-bit
+      terminationGracePeriodSeconds: 10
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/master
+        operator: Exists
+      volumes:
+      - hostPath:
+          path: /var/log
+          type: ""
+        name: varlog
+      - hostPath:
+          path: /var/lib/docker/containers
+          type: ""
+        name: varlibdockercontainers
+      - configMap:
+          defaultMode: 420
+          name: fluent-bit-config
+        name: fluent-bit-etc
+      - hostPath:
+          path: /mnt
+          type: ""
+        name: mnt
+  updateStrategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
