@@ -20,17 +20,18 @@ This section assume that you understand the following concepts from FB:
 - Key Concepts: https://docs.fluentbit.io/manual/concepts/key-concepts
 - Stream Processing and Data Pipeline: https://docs.fluentbit.io/manual/stream-processing/overview
 
-- daemonset.yaml: the daemonset defines how the FB pods will be created. Is added as part of this example as it incorporates a few environment variables that are used accross the configuration files
-- secrets.yaml: defines the values that are referenced within the daemonset
-- fluent-bit.conf: the FB configuration that defines the INPUT (what and how the logs files are loaded) and the OUTPUTS (where the processed logs are sent)
-- parsers.conf: the FB configuration that defines how the INPUT are parsed
+Solution elements:
+* daemonset.yaml: the daemonset defines how the FB pods will be created. Is added as part of this example as it incorporates a few environment variables that are used accross the configuration files
+* secrets.yaml: defines the values that are referenced within the daemonset
+* fluent-bit.conf: the FB configuration that defines the INPUT (what and how the logs files are loaded) and the OUTPUTS (where the processed logs are sent)
+* parsers.conf: the FB configuration that defines how the INPUT are parsed
 
 
 ## How To
 This section describes a few ideas to extent this example
 
 ### Add new logs to parse other services
-	In case you have a new component that you want to include as part of the FB config, you should (generic steps)
+In case you have a new component that you want to include as part of the FB config, you should (generic steps)
 - Define a new Input (where to locate the log file, usually identified by a Regex) with a proper tag 
 - Define at least one parser matching the defined tag (how to parse the log structure) and one dedicated kubernetes parser (optional, inly if k8s metadata is needed)
 - Optional: include filters
@@ -53,8 +54,3 @@ Want to contribute? Great!
 	- Create a feature branch using the naming convention feature/name-of-the-feature (please include evidence and testing results)
 	- Once it's ready, push your changes
 	- Open a pull request for a review
-
-
-
-
-
