@@ -1,5 +1,10 @@
-# Fluentbit Example for RTF  on Self-Managed k8s
-This repository contains an example fluentbit (FB) configuration for RTF on Self-Managed kubernetes. The output used is an example for Azure Log Analytics, however this output can easily be overridden to use other target systems.
+# Fluentbit Example for RTF on Self-Managed k8s
+This repository contains an example fluentbit (FB) configuration for RTF on Self-Managed kubernetes. The output used is an example for Azure Log Analytics, however this can easily be overridden to use other target systems.
+
+## Why?
+Fluentbit has become one of the [most extended](https://www.cncf.io/blog/2022/03/22/fluent-bit-reaches-1-billion-downloads/) solutions to collect and process logs given the increased scalability, flexibility, and performance when compared to other market lead solutions, like Fluentd.
+
+Given its growing popularity, it is normal to find customers who want to adopt it as an enterprise-level solution for their k8s clusters to address typical requirements such as combining multiple logs into a single log. There is a lot of documentation on the net about how to create a multiline parser, but since the Fluentbit community is very active, changes are continuously introduced and it is easy to find documentation that refers to deprecated configurations.
 
 ## Features provided
 - A parser with multiline support to unify logs that have been split due to Docker's limitation of processing 16K chunks. This is especially useful in cases where the logs are excessively large (although they shouldn't! If this is the case, you should review your login strategy)
@@ -22,9 +27,9 @@ This section assume that you understand the following concepts from FB:
 
 
 ## How To
-This section describe few ideas to extent this example
+This section describes a few ideas to extent this example
 
-### Add new logs to be parsed for other services
+### Add new logs to parse other services
 	In case you have a new component that you want to include as part of the FB config, you should (generic steps)
 - Define a new Input (where to locate the log file, usually identified by a Regex) with a proper tag 
 - Define at least one parser matching the defined tag (how to parse the log structure) and one dedicated kubernetes parser (optional, inly if k8s metadata is needed)
