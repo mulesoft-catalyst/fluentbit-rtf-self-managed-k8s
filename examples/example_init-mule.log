@@ -1,0 +1,15 @@
+2022-11-19T01:56:38.584082045Z stdout F time="2022-11-19T01:56:38Z" level=info msg="Reading annotations..."
+2022-11-19T01:56:38.584136545Z stdout F time="2022-11-19T01:56:38Z" level=info msg="Parsing resources annotation..."
+2022-11-19T01:56:38.584146545Z stdout F time="2022-11-19T01:56:38Z" level=info msg="Application resources:"
+2022-11-19T01:56:38.584174445Z stdout F time="2022-11-19T01:56:38Z" level=info msg="  1. /opt/mule/apps/test-aks.jar (https://configuration-resolver.prod.cloudhub.io/api/v1/deployments/{{obfuscated_uuid}}/assets/{{obfuscated_aaset}})"
+2022-11-19T01:56:38.584184145Z stdout F time="2022-11-19T01:56:38Z" level=info msg="  2. /opt/mule/conf/test-aks.yml (https://configuration-resolver.prod.cloudhub.io/api/v1/deployments/{{obfuscated_uuid}}}/configurations/{{ObfUScAtED_aSsET}})"
+2022-11-19T01:56:38.584205245Z stdout F time="2022-11-19T01:56:38Z" level=info msg="Fetching from cache..." res=/opt/mule/conf/test-aks.yml
+2022-11-19T01:56:38.584215945Z stdout F Downloading file http://resource-cache.rtf.svc.cluster.local/api/v1/deployments/{{obfuscated_uuid}}/configurations/{{ObfUScAtED_aSsET}}... 
+2022-11-19T01:56:38.584222145Z stdout F time="2022-11-19T01:56:38Z" level=info msg="Fetching from cache..." res=/opt/mule/apps/test-aks.jar
+2022-11-19T01:56:38.584227045Z stdout F Downloading file http://resource-cache.rtf.svc.cluster.local/api/v1/deployments/{{obfuscated_uuid}}}/assets/{{obfuscated_asset}}... 
+2022-11-19T01:56:38.652196337Z stdout F time="2022-11-19T01:56:38Z" level=info msg="Got response headers" cacheStatus=HIT res=/opt/mule/conf/test-aks.yml
+2022-11-19T01:56:38.656964244Z stdout F time="2022-11-19T01:56:38Z" level=info msg="Got response headers" cacheStatus=HIT res=/opt/mule/apps/test-aks.jar
+2022-11-19T01:56:43.652918192Z stdout F 5s: Still downloading /mnt/overlay/opt/mule/conf/test-aks.yml... 0MB 
+2022-11-19T01:56:43.652952392Z stdout F time="2022-11-19T01:56:43Z" level=info msg="Fetch complete" res=/opt/mule/conf/test-aks.yml size=0MB
+2022-11-19T01:56:43.657180193Z stdout F 5s: Still downloading /mnt/overlay/opt/mule/apps/test-aks.jar... 0MB 
+2022-11-19T01:56:43.657198693Z stdout F time="2022-11-19T01:56:43Z" level=info msg="Fetch complete" res=/opt/mule/apps/test-aks.jar size=4MB
